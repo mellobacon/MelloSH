@@ -1,0 +1,5 @@
+﻿{
+  "echo": "test echo",
+  "ls": "test ls",
+  "cd": "test cd"
+}
