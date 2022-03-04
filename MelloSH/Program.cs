@@ -1,4 +1,3 @@
 ﻿using MelloShell;
 
-var shell = new Shell();
-shell.Run();
+Shell.Run();
