@@ -2,26 +2,23 @@
 
 public class Ls : ICommand
 {
-    public void Run(object? input)
+    public void Run(string[]? input)
     {
-        if (input is string[] dir)
+        if (input is null)
         {
-            if (dir.Length == 0)
+            string currentdir = Directory.GetCurrentDirectory();
+            PrintFiles(currentdir);
+        }
+        else
+        {
+            foreach (string arg in input)
             {
-                string currentdir = Directory.GetCurrentDirectory();
-                PrintFiles(currentdir);
-            }
-            else
-            {
-                foreach (string arg in dir)
+                if (!Directory.Exists(arg))
                 {
-                    if (!Directory.Exists(arg))
-                    {
-                        Console.Error.WriteLine($"Error: {arg} is not a valid argument or directory");
-                        continue;
-                    }
-                    PrintFiles(arg);
+                    Console.Error.WriteLine($"Error: {arg} is not a valid argument or directory");
+                    continue;
                 }
+                PrintFiles(arg);
             }
         }
     }

@@ -2,14 +2,12 @@
 
 public class Echo : ICommand
 {
-    public void Run(object? input)
+    public void Run(string[]? input)
     {
-        if (input is string[] args)
+        if (input is null) return;
+        foreach (string str in input)
         {
-            foreach (string str in args)
-            {
-                Console.WriteLine(str);
-            }
+            Console.WriteLine(str);
         }
     }
 }

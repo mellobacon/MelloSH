@@ -2,25 +2,22 @@
 
 public class Cd : ICommand
 {
-    public void Run(object? input)
+    public void Run(string[]? input)
     {
-        if (input is string[] dir)
+        if (input is null)
         {
-            if (dir.Length == 0)
-            {
-                Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
-                return;
-            }
+            Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
+            return;
+        }
 
-            if (Directory.Exists(dir[0]))
-            {
-                Directory.SetCurrentDirectory(dir[0]);
-                Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
-            }
-            else
-            {
-                Console.Error.WriteLine($"Error: {dir[0]} does not exist");
-            }
+        if (Directory.Exists(input[0]))
+        {
+            Directory.SetCurrentDirectory(input[0]);
+            Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
+        }
+        else
+        {
+            Console.Error.WriteLine($"Error: {input[0]} does not exist");
         }
     }
 }
