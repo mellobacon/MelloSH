@@ -1,10 +1,11 @@
 ﻿namespace MelloShell.Commands;
 
+[Command("ls")]
 public class Ls : ICommand
 {
     public void Run(string[]? input)
     {
-        if (input is null)
+        if (input!.Length == 0)
         {
             string currentdir = Directory.GetCurrentDirectory();
             PrintFiles(currentdir);

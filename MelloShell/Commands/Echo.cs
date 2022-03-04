@@ -1,5 +1,6 @@
 ﻿namespace MelloShell.Commands;
 
+[Command("echo")]
 public class Echo : ICommand
 {
     public void Run(string[]? input)

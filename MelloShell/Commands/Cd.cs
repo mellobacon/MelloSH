@@ -1,10 +1,11 @@
 ﻿namespace MelloShell.Commands;
 
+[Command("cd")]
 public class Cd : ICommand
 {
     public void Run(string[]? input)
     {
-        if (input is null)
+        if (input!.Length == 0)
         {
             Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
             return;
