@@ -8,6 +8,8 @@ public class Shell
     private readonly Dictionary<string, Type>? _commands = new ();
     public Shell()
     {
+        // Commands are stored in the "Commands" directory.
+        // Iterate through the project, get any valid command files, and cache the command info
         foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())
         {
             if (!type.GetInterfaces().Contains(typeof(ICommand))) continue;
@@ -17,17 +19,18 @@ public class Shell
     }
     public void Run()
     {
-        const string prompt = "MelloShell - $";
+        const string prompt = "MelloShell> ";
         while (true)
         {
             Console.Write(prompt);
             string? input = Console.ReadLine();
             if (input is null) continue;
             if (input is "exit") break;
+            
             Execute(input);
         }
     }
-
+    
     private void Execute(string input)
     {
         string[] args = input.Split();
