@@ -1,14 +1,15 @@
 ﻿using System.Globalization;
 using System.Reflection;
+using MelloShell.Commands;
 using Newtonsoft.Json;
 
 namespace MelloShell;
 
-public class Shell
+public static class Shell
 {
-    public void Run()
+    public static void Run()
     {
-        const string prompt = "MelloShell - $ ";
+        const string prompt = "MelloShell - $";
         while (true)
         {
             Console.Write(prompt);
@@ -37,20 +38,17 @@ public class Shell
             return;
         }
 
-        string command = input.Split(" ")[0];
+        string commandname = input.Split(" ")[0];
         string[] commandinput = input.Split(" ")[1..];
-        if (commands.ContainsKey(command))
+        if (commands.ContainsKey(commandname))
         {
             // reflection. fancy
             
             // get the command to run
-            var commandtype = Type.GetType($"MelloShell.Commands.{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(command)}");
-            // get the constructor info even tho its nonexistent atm
-            ConstructorInfo? ctorinfo = commandtype?.GetConstructor(Type.EmptyTypes);
-            object? ctor = ctorinfo?.Invoke(Array.Empty<object>());
+            var commandtype = Type.GetType($"MelloShell.Commands.{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(commandname)}");
             // run the command and pass in any input if provided
-            MethodInfo? process = commandtype?.GetMethod("Run");
-            process?.Invoke(ctor, new object?[] { commandinput });
+            var command = (ICommand)Activator.CreateInstance(commandtype!)!;
+            command.Run(commandinput);
         }
     }
 }
