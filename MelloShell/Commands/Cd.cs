@@ -1,6 +1,6 @@
 ﻿namespace MelloShell.Commands;
 
-[Command("cd")]
+[CommandAttribute("cd")]
 public class Cd : ICommand
 {
     public void Run(string[]? input)

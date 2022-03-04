@@ -1,6 +1,6 @@
 ﻿namespace MelloShell.Commands;
 
-[Command("ls")]
+[CommandAttribute("ls")]
 public class Ls : ICommand
 {
     public void Run(string[]? input)

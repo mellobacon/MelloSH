@@ -11,7 +11,7 @@ public class Shell
         foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())
         {
             if (!type.GetInterfaces().Contains(typeof(ICommand))) continue;
-            var commandtype = type.GetCustomAttribute<Command>()!;
+            var commandtype = type.GetCustomAttribute<CommandAttribute>()!;
             _commands!.Add(commandtype.Commandname, type);
         }
     }

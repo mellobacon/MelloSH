@@ -1,10 +1,10 @@
 ﻿namespace MelloShell.Commands;
 
-public class Command : Attribute
+public class CommandAttribute : Attribute
 {
     public readonly string Commandname;
     public string[]? Aliases;
-    public Command(string name)
+    public CommandAttribute(string name)
     {
         Commandname = name;
     }
