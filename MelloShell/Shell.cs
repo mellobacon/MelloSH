@@ -46,5 +46,9 @@ public class Shell
             var command = (ICommand)Activator.CreateInstance(_commands[commandname])!;
             command.Run(args);
         }
+        else
+        {
+            Console.Error.WriteLine($"Error: {commandname} is not a valid command");
+        }
     }
 }
