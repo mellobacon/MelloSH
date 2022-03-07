@@ -1,38 +1,34 @@
 ﻿namespace MelloShell.Commands;
 
-[CommandAttribute("rmdir", Aliases = new []{"rm"})]
+[CommandAttribute("rmdir")]
 public class RemoveDirectory : ICommand
 {
-    public void Run(string[]? input)
+    public void Run(string[] input)
     {
-        switch (input!.Length)
+        string path;
+        string dirname;
+        switch (input.Length)
         {
             case 1:
-                try
-                {
-                    Directory.Delete($@"{Directory.GetCurrentDirectory()}\{input[0]}");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Error: {e.Message}");
-                }
-                return;
+                path = Directory.GetCurrentDirectory();
+                dirname = input[0];
+                break;
             case 2:
-                try
-                {
-                    if (Directory.Exists(input[0]))
-                    {
-                        Directory.Delete($@"{input[0]}\{input[1]}");
-                    }
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine($"Error: {e.Message}");
-                }
-                return;
+                path = input[0];
+                dirname = input[1];
+                break;
             default:
                 Console.WriteLine($"Error: No arguments given");
                 return;
+        }
+
+        if (Directory.Exists(path) || !Directory.Exists($@"{path}\{dirname}"))
+        {
+            Directory.Delete($@"{path}\{dirname}");
+        }
+        else
+        {
+            Console.WriteLine($"Error: idk something with the directory is wrong. figure it out");
         }
     }
 }

@@ -3,22 +3,29 @@
 [CommandAttribute("cd")]
 public class Cd : ICommand
 {
-    public void Run(string[]? input)
+    public void Run(string[] input)
     {
-        if (input!.Length == 0)
+        var path = "";
+        switch (input.Length)
         {
-            Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
-            return;
+            case 0:
+                path = Directory.GetCurrentDirectory();
+                break;
+            case 1:
+                path = input[0];
+                break;
+            default:
+                Console.WriteLine("Error: args not valid or something...idk");
+                return;
         }
 
-        if (Directory.Exists(input[0]))
+        if (Directory.Exists(path))
         {
-            Directory.SetCurrentDirectory(input[0]);
-            Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
+            Directory.SetCurrentDirectory(path);
         }
         else
         {
-            Console.Error.WriteLine($"Error: {input[0]} does not exist");
+            Console.WriteLine($"Error: {path} does not exist or is not a directory");
         }
     }
 }
