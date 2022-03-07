@@ -2,5 +2,5 @@
 
 public interface ICommand
 {
-    void Run(string[]? input);
+    void Run(string[] input);
 }

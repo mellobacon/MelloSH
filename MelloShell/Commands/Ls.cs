@@ -4,10 +4,10 @@
 public class Ls : ICommand
 {
     private readonly string[] _options = { "-l", "-a", "-la"};
-    public void Run(string[]? input)
+    public void Run(string[] input)
     {
         string currentdir = Directory.GetCurrentDirectory();
-        if (input!.Length == 0)
+        if (input.Length == 0)
         {
             PrintFiles(currentdir);
         }
@@ -33,7 +33,7 @@ public class Ls : ICommand
             }
         }
     }
-
+    
     private static void PrintFiles(string directory, bool showhidden = false, bool longlist = false)
     {
         Console.WriteLine($"Directory: {directory}");
