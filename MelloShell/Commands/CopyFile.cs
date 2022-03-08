@@ -25,7 +25,7 @@ public class CopyFile : ICommand
         if (Directory.Exists(path))
         {
             bool overwrite = File.Exists($@"{path}\{filename}");
-            File.Move(filename, path, overwrite);
+            File.Copy(filename, $@"{path}\{filename}", overwrite);
         }
         else
         {
