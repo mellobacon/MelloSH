@@ -13,18 +13,22 @@ public class RemoveDirectory : ICommand
                 path = Directory.GetCurrentDirectory();
                 dirname = input[0];
                 break;
-            case 2:
-                path = input[0];
-                dirname = input[1];
-                break;
             default:
                 Console.WriteLine($"Error: No arguments given");
                 return;
         }
 
-        if (Directory.Exists(path) || !Directory.Exists($@"{path}\{dirname}"))
+        if (Directory.Exists(path))
         {
-            Directory.Delete($@"{path}\{dirname}");
+            // Directory must be empty
+            if (Directory.GetFileSystemEntries($@"{path}\{dirname}").Length == 0)
+            {
+                Directory.Delete($@"{path}\{dirname}");
+            }
+            else
+            {
+                Console.WriteLine("Error: Directory must be empty");
+            }
         }
         else
         {
