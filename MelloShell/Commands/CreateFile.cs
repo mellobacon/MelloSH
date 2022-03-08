@@ -11,6 +11,7 @@ public class CreateFile : ICommand
         {
             case 1:
                 filename = input[0];
+                path = Directory.GetCurrentDirectory();
                 break;
             case 2:
                 filename = input[0];
