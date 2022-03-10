@@ -1,34 +1,45 @@
 ﻿namespace MelloShell.Commands;
 
+/**
+ * Makes files but in the current dirctory because im lazy (for now.
+ * probably gonna have renaming be a thing too at some point)
+ * Usage: touch [filename]
+ */
 [CommandAttribute("touch", Aliases = new []{"createfile"})]
 public class CreateFile : ICommand
 {
     public void Run(string[] input)
     {
-        string filename;
-        var path = "";
+        var path = Directory.GetCurrentDirectory();
         switch (input.Length)
         {
-            case 1:
-                filename = input[0];
-                path = Directory.GetCurrentDirectory();
-                break;
-            case 2:
-                filename = input[0];
-                path = input[1];
+            case > 0:
+                foreach (var filename in input)
+                {
+                    CreateFiles(filename, path);
+                }
                 break;
             default:
                 Console.WriteLine("Error: args not valid or something...idk");
                 return;
         }
+    }
 
-        if (Directory.Exists(path))
+    private static void CreateFiles(string filename, string dest)
+    {
+        // Files cant be a directory
+        if (filename.Contains('\\') || filename.Contains('/'))
         {
-            File.Create($@"{path}\{filename}");
+            Console.WriteLine($"Error: {filename} cannot be a directory. Skipping.");
+            return;
         }
-        else
+        // TODO: fix "being used by another process" error. probably just need to close the stream
+        if (File.Exists($@"{dest}\{filename}"))
         {
-            Console.WriteLine($"{path} does not exist");
+            File.SetLastWriteTime($@"{dest}\{filename}", DateTime.Now);
+            
+            return;
         }
+        File.Create($@"{dest}\{filename}");
     }
 }

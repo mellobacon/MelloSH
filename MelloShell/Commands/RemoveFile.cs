@@ -5,30 +5,26 @@ public class RemoveFile : ICommand
 {
     public void Run(string[] input)
     {
-        string filename;
-        var path = "";
+        var path = Directory.GetCurrentDirectory();
         switch (input.Length)
         {
-            case 1:
-                filename = input[0];
-                path = Directory.GetCurrentDirectory();
-                break;
-            case 2:
-                filename = input[0];
-                path = input[1];
-                break;
+            case > 0:
+                foreach (var filename in input)
+                {
+                    if (File.Exists(filename))
+                    {
+                        File.Delete($@"{path}\{filename}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {filename} does not exist");
+                    }
+                }
+
+                return;
             default:
                 Console.WriteLine("Error: args not valid or something...idk");
                 return;
-        }
-
-        if (Directory.Exists(path))
-        {
-            File.Delete($@"{path}\{filename}");
-        }
-        else
-        {
-            Console.WriteLine($"{path} does not exist");
         }
     }
 }
