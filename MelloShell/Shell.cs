@@ -63,11 +63,8 @@ public class Shell
             {
                 if ( args[0].Equals("-h") || args[0].Equals("--h") || args[0].Equals("--help"))
                 {
-                    if (_docs.ContainsKey(_commands[commandname].Name))
-                    {
-                        Console.WriteLine(_docs[_commands[commandname].Name]);
-                        return;
-                    }
+                    Console.WriteLine(_docs[_commands[commandname].Name]);
+                    return;
                 }
             }
             var command = (ICommand)Activator.CreateInstance(_commands[commandname])!;
@@ -121,12 +118,14 @@ public class Shell
         {
             if (tag[i]!.Attributes![0].Value.Equals($"T:MelloShell.Commands.{name}"))
             {
+                // trim each line since it likes to keep the spacing from the xml
                 StringBuilder formatted = new StringBuilder();
                 string[] lines = tag[i]!.InnerText.Split("\r\n");
                 foreach (var line in lines)
                 {
                     formatted.Append($"{line.Trim()}\n");
                 }
+                
                 docs.Add(formatted.ToString());
             }
         }
