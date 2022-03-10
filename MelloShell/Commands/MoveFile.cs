@@ -1,5 +1,17 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Moves files or directories to another directory. <br/>
+/// <remarks>Does not support renaming files or directories. See <see cref="RenameFile">rename</see>.</remarks>
+/// Usage: <c>mv [options] [source name] [dest name]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Moves the file "testfile1" to the directory "testdir2"
+/// <code>
+///     mv testfile1 testdir2
+/// </code>
+/// </summary>
 [CommandAttribute("mv", Aliases = new []{"move"})]
 public class MoveFile : ICommand
 {

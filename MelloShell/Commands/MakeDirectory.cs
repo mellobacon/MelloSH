@@ -1,5 +1,17 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Creates directories <br/>
+/// 
+/// Usage: <c>mkdir [options] [dirname(s)]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Creates directory "testdir1" and "testdir2" in the current directory.
+/// <code>
+///     mkdir testdir1 testdir2
+/// </code>
+/// </summary>
 [CommandAttribute("mkdir")]
 public class MakeDirectory : ICommand
 {

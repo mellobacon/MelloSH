@@ -1,5 +1,17 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Deletes directories. <br/>
+/// 
+/// Usage: <c>rmdir [options] [directory(s)]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Deletes directory "testdir2" in "testdir". "testdir" does not get removed.
+/// <code>
+///     rmdir testdir/testdir2
+/// </code>
+/// </summary>
 [CommandAttribute("rmdir")]
 public class RemoveDirectory : ICommand
 {

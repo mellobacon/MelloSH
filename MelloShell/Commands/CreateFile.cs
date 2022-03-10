@@ -1,10 +1,16 @@
 ﻿namespace MelloShell.Commands;
 
-/**
- * Makes files but in the current dirctory because im lazy (for now.
- * probably gonna have renaming be a thing too at some point)
- * Usage: touch [filename]
- */
+/// <summary>
+/// Creates files or changes files access time. <br/>
+/// Usage: <c>touch [options] [filename(s)]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Creates a file named "testfile1".
+/// <code>
+///     touch tesfile1
+/// </code>
+/// </summary>
 [CommandAttribute("touch", Aliases = new []{"createfile"})]
 public class CreateFile : ICommand
 {

@@ -1,5 +1,20 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Lists the directories and files of a directory and its information.
+/// No input prints from the current directory. <br/>
+/// 
+/// Usage: <c>ls [options] [directory(s)]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text<br/>
+/// -l: Prints this help text<br/>
+/// -a: Include hidden directories<br/>
+/// Example: <br/>
+/// Prints the files of the "testdir" directory
+/// <code>
+///     ls testdir
+/// </code>
+/// </summary>
 [CommandAttribute("ls")]
 public class Ls : ICommand
 {

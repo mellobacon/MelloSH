@@ -1,5 +1,17 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Navigates to a directory. Supplying no directory outputs nothing.<br/>
+/// 
+/// Usage: <c>cd [options] [directory]</c> <br/>
+/// Options:
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Navigates to the "testdir/ directory.
+/// <code>
+///     cd testdir
+/// </code>
+/// </summary>
 [CommandAttribute("cd")]
 public class Cd : ICommand
 {

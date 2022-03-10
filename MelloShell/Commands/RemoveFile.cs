@@ -1,5 +1,17 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Deletes files. <br/>
+/// 
+/// Usage: <c>rm [options] [file(s)]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Deletes the files "testfile1" and "testfile2" in the current directory.
+/// <code>
+///     rm testfile1 testfile2
+/// </code>
+/// </summary>
 [CommandAttribute("rm")]
 public class RemoveFile : ICommand
 {

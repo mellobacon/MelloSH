@@ -1,12 +1,19 @@
 ﻿namespace MelloShell.Commands;
 
-/**
- * Copies a file or multiple files to a directory
- * Usage: cp [options] [source] [dest]
- * options:
- *  -d: allows copying of directories
- *  -p: prompts before overwriting
- */
+/// <summary>
+/// Copies a file or multiple files to a directory. <br/>
+/// <remarks>Currently doesnt support copying directories.</remarks>
+/// Usage: <c>cp [options] [source] [dest]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text<br/>
+/// -d: allows copying of directories<br/>
+/// -p: prompts before overwriting<br/>
+/// Example: <br/>
+/// Copies the file "testfile1" to the "testdir" directory.
+/// <code>
+///     cp testfile1 testdir
+/// </code>
+/// </summary>
 [CommandAttribute("cp")]
 public class CopyFile : ICommand
 {

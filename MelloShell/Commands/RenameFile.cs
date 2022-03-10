@@ -1,5 +1,17 @@
 ﻿namespace MelloShell.Commands;
 
+/// <summary>
+/// Renames files. <br/>
+/// <remarks>Currently doesnt support renaming directories.</remarks>
+/// Usage: <c>rename [options] [source] [suggested name]</c> <br/>
+/// Options: <br/>
+/// -h, --h, --help: Prints this help text <br/>
+/// Example: <br/>
+/// Renames file "foo" to "bar".
+/// <code>
+///     rename foo bar
+/// </code>
+/// </summary>
 [CommandAttribute("rename")]
 public class RenameFile : ICommand
 {
