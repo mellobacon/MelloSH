@@ -12,7 +12,7 @@ public class RenameFile : ICommand
                 var newname = input[1];
                 if (originalname.Equals(newname))
                 {
-                    Console.WriteLine($"Error: {originalname} and {newname} are the same file or name or whatever");
+                    Console.WriteLine($"Error: {originalname} and {newname} are the same file");
                 }
                 else if (File.Exists(originalname))
                 {
@@ -24,7 +24,7 @@ public class RenameFile : ICommand
                 }
                 return;
             default:
-                Console.WriteLine("Error: args not valid or something...idk");
+                Console.WriteLine("Error: This command takes 2 args");
                 return;
         }
     }

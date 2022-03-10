@@ -15,7 +15,7 @@ public class Cd : ICommand
                 path = input[0];
                 break;
             default:
-                Console.WriteLine("Error: args not valid or something...idk");
+                Console.WriteLine("Error: This command takes 0-1 args");
                 return;
         }
 

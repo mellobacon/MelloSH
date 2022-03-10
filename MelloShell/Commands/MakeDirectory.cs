@@ -17,12 +17,12 @@ public class MakeDirectory : ICommand
                     }
                     else
                     {
-                        Console.WriteLine($"Error: idk something with the directory is wrong. figure it out");
+                        Console.WriteLine($"Error: {dirname} is an existing directory");
                     }
                 }
                 return;
             default:
-                Console.WriteLine($"Error: No arguments given");
+                Console.WriteLine($"Error: This command takes 1 or more args");
                 return;
         }
     }

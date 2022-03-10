@@ -25,7 +25,7 @@ public class RemoveDirectory : ICommand
                     }
                     else
                     {
-                        Console.WriteLine($"Error: idk something with the directory is wrong. figure it out");
+                        Console.WriteLine($"Error: {dirname} is not an existing directory");
                     }
                 }
                 return;

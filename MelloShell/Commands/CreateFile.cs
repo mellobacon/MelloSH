@@ -20,7 +20,7 @@ public class CreateFile : ICommand
                 }
                 break;
             default:
-                Console.WriteLine("Error: args not valid or something...idk");
+                Console.WriteLine("Error: An error occurred. Try again");
                 return;
         }
     }

@@ -15,7 +15,7 @@ public class MoveFile : ICommand
                     {
                         if (input[index].Equals(dest))
                         {
-                            Console.WriteLine($"Error: {input[0]} and {dest} are the same name. dont do that smh");
+                            Console.WriteLine($"Error: {input[0]} and {dest} are the same name. Dont do that smh");
                             continue;
                         }
                         if (File.Exists(input[index]))
@@ -34,7 +34,7 @@ public class MoveFile : ICommand
                 }
                 return;
             default:
-                Console.WriteLine("Error: args not valid or something...idk");
+                Console.WriteLine("Error: This command takes 1 or more args");
                 return;
         }
     }

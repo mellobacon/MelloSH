@@ -23,7 +23,7 @@ public class RemoveFile : ICommand
 
                 return;
             default:
-                Console.WriteLine("Error: args not valid or something...idk");
+                Console.WriteLine("Error: This command takes 1 or more args");
                 return;
         }
     }

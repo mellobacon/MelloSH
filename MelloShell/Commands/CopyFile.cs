@@ -26,7 +26,7 @@ public class CopyFile : ICommand
                 
                 return;
             default:
-                Console.WriteLine("Error: args not valid or something...idk");
+                Console.WriteLine("Error: This command takes 1 or more args");
                 return;
         }
     }
@@ -55,7 +55,7 @@ public class CopyFile : ICommand
         }
         else
         {
-            Console.WriteLine($"{dest} does not exist");
+            Console.WriteLine($"Error: {dest} does not exist");
         }
     }
 }
