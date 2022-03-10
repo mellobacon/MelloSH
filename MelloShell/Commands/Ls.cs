@@ -27,8 +27,8 @@ public class Ls : ICommand
                     currentdir = arg;
                 }
 
-                if (arg == _options[0] || arg == _options[2]) longlist = true;
-                if (arg == _options[1] || arg == _options[2]) showhiddenfiles = true;
+                if (arg.Equals(_options[0]) || arg.Equals(_options[2])) longlist = true;
+                if (arg.Equals(_options[1]) || arg.Equals(_options[2])) showhiddenfiles = true;
                 PrintFiles(currentdir, showhiddenfiles, longlist);
             }
         }
@@ -36,31 +36,69 @@ public class Ls : ICommand
     
     private static void PrintFiles(string directory, bool showhidden = false, bool longlist = false)
     {
-        Console.WriteLine($"Directory: {directory}");
         Console.WriteLine("--------------------------------");
-        string[] files = Directory.GetFileSystemEntries(directory);
-        if (showhidden)
-        {
-            files = Directory.GetFileSystemEntries(directory, "*",
-                new EnumerationOptions { ReturnSpecialDirectories = true });
-        }
+        // TODO: stop it from showing hidden files by default even though i am telling it to because its stubborn
+        // and clearly wants my demise
+        string[] files = Directory.GetFileSystemEntries(directory, "*",
+            new EnumerationOptions { ReturnSpecialDirectories = showhidden });
         foreach (string file in files)
         {
             string filename = file.Split(@"\")[^1];
-            if (Directory.Exists($@"{directory}\{filename}"))
-            {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-            }
-
+            var f = new FileInfo(filename);
+            
             if (longlist)
             {
-                Console.WriteLine($"{filename}");
+                char archive = '-';
+                char compressed = '-';
+                char _directory = '-';
+                char hidden = '-';
+                char _readonly = '-';
+                if ((f.Attributes & FileAttributes.Archive) != 0)
+                {
+                    archive = 'a';
+                }
+
+                if ((f.Attributes & FileAttributes.Compressed) != 0)
+                {
+                    compressed = 'c';
+                }
+
+                if ((f.Attributes & FileAttributes.Directory) != 0)
+                {
+                    _directory = 'd';
+                }
+
+                if ((f.Attributes & FileAttributes.Hidden) != 0)
+                {
+                    hidden = 'h';
+                }
+                if ((f.Attributes & FileAttributes.ReadOnly) != 0)
+                {
+                    _readonly = 'r';
+                }
+
+                var attributes = $"{_directory}{archive}{_readonly}{compressed}{hidden}";
+                
+                Console.Write($"{attributes}\t{f.LastWriteTime}\t");
+            }
+            
+            if ((File.GetAttributes($@"{directory}\{filename}") & FileAttributes.Directory) != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+            }
+
+            Console.Write($"{filename}");
+            Console.ResetColor();
+            
+            if (longlist)
+            {
+                Console.WriteLine();
             }
             else
             {
-                Console.Write($"{filename}\t");
+                Console.Write("    ");
             }
-            Console.ResetColor();
         }
         Console.WriteLine();
     }
