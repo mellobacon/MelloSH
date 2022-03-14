@@ -52,10 +52,10 @@ public class Ls : ICommand
     private static void PrintFiles(string directory, bool showhidden = false, bool longlist = false)
     {
         Console.WriteLine("--------------------------------");
-        // TODO: stop it from showing hidden files by default even though i am telling it to because its stubborn
-        // and clearly wants my demise
+        FileAttributes fileAttributes = showhidden ? FileAttributes.System 
+            : FileAttributes.System | FileAttributes.Hidden;
         string[] files = Directory.GetFileSystemEntries(directory, "*",
-            new EnumerationOptions { ReturnSpecialDirectories = showhidden });
+            new EnumerationOptions { ReturnSpecialDirectories = showhidden, AttributesToSkip = fileAttributes});
         foreach (string file in files)
         {
             string filename = file.Split(@"\")[^1];
@@ -102,10 +102,8 @@ public class Ls : ICommand
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
             }
-
             Console.Write($"{filename}");
             Console.ResetColor();
-            
             if (longlist)
             {
                 Console.WriteLine();
