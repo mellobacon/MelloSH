@@ -22,12 +22,20 @@ public class RunProgram : ICommand
         switch (input.Length)
         {
             case > 0:
+                // TODO: yea this is uh. jank. should find a way to make files start from the current directory
+                var args = @$"{Directory.GetCurrentDirectory()}/{string.Join(" ", input[1..])}";
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
-                    FileName = input[0]
+                    FileName = input[0],
+                    Arguments = args
                 };
-                using (Process program = Process.Start(startInfo)!)
+                using (Process? program = Process.Start(startInfo))
                 {
+                    if (program is null)
+                    {
+                        Console.WriteLine($"Error: {input[0]} is not a valid executable");
+                        return;
+                    }
                     program.WaitForExit();
                 }
 
