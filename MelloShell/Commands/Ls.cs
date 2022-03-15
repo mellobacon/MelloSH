@@ -63,11 +63,11 @@ public class Ls : ICommand
             
             if (longlist)
             {
-                char archive = '-';
-                char compressed = '-';
-                char _directory = '-';
-                char hidden = '-';
-                char _readonly = '-';
+                var archive = '-';
+                var compressed = '-';
+                var _directory = '-';
+                var hidden = '-';
+                var _readonly = '-';
                 if ((f.Attributes & FileAttributes.Archive) != 0)
                 {
                     archive = 'a';
@@ -92,7 +92,7 @@ public class Ls : ICommand
                     _readonly = 'r';
                 }
 
-                var attributes = $"{_directory}{archive}{_readonly}{compressed}{hidden}";
+                string attributes = $"{_directory}{archive}{_readonly}{compressed}{hidden}";
                 
                 Console.Write($"{attributes}\t{f.LastWriteTime}\t");
             }

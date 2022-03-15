@@ -20,8 +20,8 @@ public class RenameFile : ICommand
         switch (input.Length)
         {
             case 2:
-                var originalname = input[0];
-                var newname = input[1];
+                string originalname = input[0];
+                string newname = input[1];
                 if (originalname.Equals(newname))
                 {
                     Console.WriteLine($"Error: {originalname} and {newname} are the same file");

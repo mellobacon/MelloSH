@@ -17,11 +17,11 @@ public class RemoveDirectory : ICommand
 {
     public void Run(string[] input)
     {
-        var path = Directory.GetCurrentDirectory();
+        string path = Directory.GetCurrentDirectory();
         switch (input.Length)
         {
             case > 0:
-                foreach (var dirname in input)
+                foreach (string dirname in input)
                 {
                     if (Directory.Exists($@"{path}\{dirname}"))
                     {

@@ -23,14 +23,14 @@ public class Shell
             _commands.Add(commandtype.Commandname, type);
             if (commandtype.Aliases != null)
             {
-                foreach (var alias in commandtype.Aliases)
+                foreach (string alias in commandtype.Aliases)
                 {
                     _commands.Add(alias, type);
                 }
             }
             
             // Get and store the command docs
-            foreach (var doc in GetDocs(type.Name))
+            foreach (string doc in GetDocs(type.Name))
             {
                 _docs.Add(type.Name, doc);
             }
@@ -79,7 +79,7 @@ public class Shell
         var parsedargs = new List<string>();
         var arg = new StringBuilder();
         var quoted = false;
-        foreach (var character in args)
+        foreach (char character in args)
         {
             switch (character)
             {
@@ -113,15 +113,15 @@ public class Shell
         XmlDocument doc = new XmlDocument();
         doc.Load("MelloShell.xml");
         
-        var tag = doc.GetElementsByTagName("member");
-        for (int i = 0; i < tag.Count; i++)
+        XmlNodeList tag = doc.GetElementsByTagName("member");
+        for (var i = 0; i < tag.Count; i++)
         {
             if (tag[i]!.Attributes![0].Value.Equals($"T:MelloShell.Commands.{name}"))
             {
                 // trim each line since it likes to keep the spacing from the xml
-                StringBuilder formatted = new StringBuilder();
+                var formatted = new StringBuilder();
                 string[] lines = tag[i]!.InnerText.Split("\r\n");
-                foreach (var line in lines)
+                foreach (string line in lines)
                 {
                     formatted.Append($"{line.Trim()}\n");
                 }

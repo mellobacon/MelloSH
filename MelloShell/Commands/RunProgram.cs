@@ -24,7 +24,7 @@ public class RunProgram : ICommand
             case > 0:
                 // TODO: yea this is uh. jank. should find a way to make files start from the current directory
                 var args = @$"{Directory.GetCurrentDirectory()}/{string.Join(" ", input[1..])}";
-                ProcessStartInfo startInfo = new ProcessStartInfo
+                var startInfo = new ProcessStartInfo
                 {
                     FileName = input[0],
                     Arguments = args

@@ -17,7 +17,7 @@ public class Cd : ICommand
 {
     public void Run(string[] input)
     {
-        var path = "";
+        string path;
         switch (input.Length)
         {
             case 0:

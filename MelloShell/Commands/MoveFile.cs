@@ -20,10 +20,10 @@ public class MoveFile : ICommand
         switch (input.Length)
         {
             case > 1:
-                var dest = input[^1];
+                string dest = input[^1];
                 if (Directory.Exists(dest))
                 {
-                    for (int index = 0; index < input.Length - 1; index++)
+                    for (var index = 0; index < input.Length - 1; index++)
                     {
                         if (input[index].Equals(dest))
                         {

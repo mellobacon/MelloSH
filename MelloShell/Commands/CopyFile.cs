@@ -26,7 +26,7 @@ public class CopyFile : ICommand
                 return;
             case > 1:
                 string dest = input[^1];
-                for (int index = 0; index < input.Length - 1; index++)
+                for (var index = 0; index < input.Length - 1; index++)
                 {
                     CopyFiles(input[index], dest);
                 }

@@ -17,11 +17,11 @@ public class RemoveFile : ICommand
 {
     public void Run(string[] input)
     {
-        var path = Directory.GetCurrentDirectory();
+        string path = Directory.GetCurrentDirectory();
         switch (input.Length)
         {
             case > 0:
-                foreach (var filename in input)
+                foreach (string filename in input)
                 {
                     if (File.Exists(filename))
                     {
