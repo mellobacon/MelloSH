@@ -56,6 +56,14 @@ public class Ls : ICommand
             : FileAttributes.System | FileAttributes.Hidden;
         string[] files = Directory.GetFileSystemEntries(directory, "*",
             new EnumerationOptions { ReturnSpecialDirectories = showhidden, AttributesToSkip = fileAttributes});
+        // TODO: fix format for ls so that it doesnt look like shit ie.
+        /*
+           bench.py    dir1        file1       file2       file3       file4       file5       hello.c     hello.js    readme.txt
+         
+           bench.py    file2       file5       readme.txt
+           dir1        file3       hello.c
+           file1       file4       hello.js
+        */
         foreach (string file in files)
         {
             string filename = file.Split(@"\")[^1];
@@ -65,9 +73,9 @@ public class Ls : ICommand
             {
                 var archive = '-';
                 var compressed = '-';
-                var _directory = '-';
+                var dir = '-';
                 var hidden = '-';
-                var _readonly = '-';
+                var @readonly = '-';
                 if ((f.Attributes & FileAttributes.Archive) != 0)
                 {
                     archive = 'a';
@@ -80,7 +88,7 @@ public class Ls : ICommand
 
                 if ((f.Attributes & FileAttributes.Directory) != 0)
                 {
-                    _directory = 'd';
+                    dir = 'd';
                 }
 
                 if ((f.Attributes & FileAttributes.Hidden) != 0)
@@ -89,10 +97,10 @@ public class Ls : ICommand
                 }
                 if ((f.Attributes & FileAttributes.ReadOnly) != 0)
                 {
-                    _readonly = 'r';
+                    @readonly = 'r';
                 }
 
-                string attributes = $"{_directory}{archive}{_readonly}{compressed}{hidden}";
+                string attributes = $"{dir}{archive}{@readonly}{compressed}{hidden}";
                 
                 Console.Write($"{attributes}\t{f.LastWriteTime}\t");
             }
