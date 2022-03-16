@@ -39,13 +39,14 @@ public class CreateFile : ICommand
             Console.WriteLine($"Error: {filename} cannot be a directory. Skipping.");
             return;
         }
-        // TODO: fix "being used by another process" error. probably just need to close the stream
         if (File.Exists($@"{dest}\{filename}"))
         {
             File.SetLastWriteTime($@"{dest}\{filename}", DateTime.Now);
             
             return;
         }
-        File.Create($@"{dest}\{filename}");
+
+        using FileStream file = File.Create($@"{dest}\{filename}");
+        file.Dispose();
     }
 }
